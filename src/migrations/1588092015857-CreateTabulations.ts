@@ -18,9 +18,18 @@ export class CreateTabulations1588092015857 implements MigrationInterface {
             type: 'text',
           },
           {
+            name: 'protocol',
+            type: 'text',
+          },
+          {
+            name: 'dateService',
+            type: 'text',
+          },
+          {
             name: 'binedNumber',
             type: 'text',
           },
+
           {
             name: 'accessNumber',
             type: 'text',

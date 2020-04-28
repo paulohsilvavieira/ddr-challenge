@@ -1,5 +1,5 @@
 export class MatchingsDTO {
-  id: number;
+  id?: number;
   recordingId: number;
   tabulationId: number;
 }

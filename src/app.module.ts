@@ -5,6 +5,8 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { TabulationsModule } from './tabulations/tabulations.module';
 import { RecordingsModule } from './recordings/recordings.module';
 import { MatchingsModule } from './matchings/matchings.module';
+import { ScheduleModule } from '@nestjs/schedule';
+
 import path = require('path');
 
 @Module({
@@ -14,9 +16,10 @@ import path = require('path');
       database: path.join(__dirname, '../database.db'),
       entities: ['dist/**/*.entity.js'],
     }),
+    ScheduleModule.forRoot(),
+    MatchingsModule,
     TabulationsModule,
     RecordingsModule,
-    MatchingsModule,
   ],
 })
 export class AppModule {}
