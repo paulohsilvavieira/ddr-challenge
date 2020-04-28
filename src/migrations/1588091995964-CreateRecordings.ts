@@ -1,11 +1,35 @@
-import {MigrationInterface, QueryRunner} from "typeorm";
+import { MigrationInterface, QueryRunner, Table } from 'typeorm';
 
 export class CreateRecordings1588091995964 implements MigrationInterface {
+  public async up(queryRunner: QueryRunner): Promise<void> {
+    await queryRunner.createTable(
+      new Table({
+        name: 'recordings',
+        columns: [
+          {
+            name: 'id',
+            type: 'int',
+            isPrimary: true,
+            isGenerated: true,
+          },
+          {
+            name: 'phone',
+            type: 'text',
+          },
+          {
+            name: 'ramal',
+            type: 'text',
+          },
+          {
+            name: 'dateRecording',
+            type: 'text',
+          },
+        ],
+      }),
+    );
+  }
 
-    public async up(queryRunner: QueryRunner): Promise<any> {
-    }
-
-    public async down(queryRunner: QueryRunner): Promise<any> {
-    }
-
+  public async down(queryRunner: QueryRunner): Promise<void> {
+    await queryRunner.dropTable('recordings', true);
+  }
 }
