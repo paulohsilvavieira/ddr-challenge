@@ -8,17 +8,18 @@ export class CreateMatchings1588091945782 implements MigrationInterface {
         columns: [
           {
             name: 'id',
-            type: 'int',
+            type: 'integer',
             isPrimary: true,
             isGenerated: true,
+            generationStrategy: 'increment',
           },
           {
             name: 'recordingId',
-            type: 'int',
+            type: 'integer',
           },
           {
             name: 'tabulationId',
-            type: 'int',
+            type: 'integer',
           },
         ],
       }),

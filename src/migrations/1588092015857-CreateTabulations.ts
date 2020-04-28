@@ -8,9 +8,10 @@ export class CreateTabulations1588092015857 implements MigrationInterface {
         columns: [
           {
             name: 'id',
-            type: 'int',
+            type: 'integer',
             isPrimary: true,
             isGenerated: true,
+            generationStrategy: 'increment',
           },
           {
             name: 'clientName',
@@ -21,7 +22,7 @@ export class CreateTabulations1588092015857 implements MigrationInterface {
             type: 'text',
           },
           {
-            name: 'acessNumber',
+            name: 'accessNumber',
             type: 'text',
           },
         ],
