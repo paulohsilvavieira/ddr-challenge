@@ -1,5 +1,4 @@
 import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
-
 @Entity()
 export class Tabulations {
   @PrimaryGeneratedColumn()
@@ -7,6 +6,12 @@ export class Tabulations {
 
   @Column()
   clientName: string;
+
+  @Column()
+  dateService: string;
+
+  @Column()
+  protocol: string;
 
   @Column()
   binedNumber: string;

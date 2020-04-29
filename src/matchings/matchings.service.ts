@@ -1,10 +1,11 @@
-import { Injectable, Logger } from '@nestjs/common';
+import { Injectable, Logger, HttpStatus } from '@nestjs/common';
 import { MatchingsDTO } from './interfaces/matchings.dto';
 import { MatchingsRepository } from './matchings.repository';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Cron } from '@nestjs/schedule';
-import { RecordingsRepository } from 'src/recordings/recordings.repository';
-import { TabulationsRepository } from 'src/tabulations/tabulations.repository';
+import { Response } from 'express';
+import { RecordingsRepository } from '../recordings/recordings.repository';
+import { TabulationsRepository } from '../tabulations/tabulations.repository';
 
 @Injectable()
 export class MatchingsService {
@@ -13,13 +14,24 @@ export class MatchingsService {
     private readonly matchingsRepository: MatchingsRepository,
     private readonly recordingsRepository: RecordingsRepository,
     private readonly tabulationsRepository: TabulationsRepository,
+    private readonly response: Response,
   ) {}
 
   private readonly logger = new Logger(MatchingsService.name);
 
-  findAll(): Promise<MatchingsDTO[]> {
-    return this.matchingsRepository.findAllMatching();
+  async findAll() {
+    try {
+      const matchings = await this.matchingsRepository.findAllMatching();
+      return this.response.status(HttpStatus.OK).json({
+        matchings,
+      });
+    } catch (error) {
+      return this.response.status(HttpStatus.INTERNAL_SERVER_ERROR).json({
+        error: new Error(error).message,
+      });
+    }
   }
+
   @Cron('* * */6 * * *')
   async makeMatching() {
     try {
